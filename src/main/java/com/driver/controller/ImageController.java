@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ImageController {
 
     @Autowired
-    private ImageService imageService;
+    private ImageService imageService=new ImageService();
     @PostMapping("/{blogId}/add-image")
     public ResponseEntity<String> addImage(@PathVariable int blogId, @RequestParam String description, @RequestParam String dimensions) {
         // Add image into the give blo`z
