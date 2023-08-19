@@ -17,6 +17,7 @@ public class ImageService {
 
     public Image addImage(Integer blogId, String description, String dimensions)
     {
+        if(!blogRepository2.existsById(blogId))return new Image();
         //add an image to the blog
         Blog blog=blogRepository2.findById(blogId).get();
 

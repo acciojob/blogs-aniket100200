@@ -64,6 +64,7 @@ public class Blog
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private User user;
 
     public List<Image> getImageList() {
