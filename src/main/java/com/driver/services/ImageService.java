@@ -25,8 +25,10 @@ public class ImageService {
         image.setDimensions(dimensions);
 
         image.setBlog(blog);
+        blog.getImageList().add(image);
 
-      image=imageRepository2.save(image);
+        //save the parent will cascade it..
+        blogRepository2.save(blog);
         return image;
 
     }
