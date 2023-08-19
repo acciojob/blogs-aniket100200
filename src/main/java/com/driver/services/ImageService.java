@@ -23,7 +23,7 @@ public class ImageService {
         //let's Image Entity.. here we go...
         Image image=new Image();
         image.setDescription(description);
-        image.setDimension(dimensions);
+        image.setDimensions(dimensions);
         image.setBlog(blog);
 
       image=imageRepository2.save(image);
@@ -40,7 +40,7 @@ public class ImageService {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         Image image=imageRepository2.findById(id).get();
 
-        String givenDimensions= image.getDimension();
+        String givenDimensions= image.getDimensions();
         String[]givenDimension=givenDimensions.split("X");
         String[]screenDimension=screenDimensions.split("X");
 
