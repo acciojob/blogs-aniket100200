@@ -27,7 +27,7 @@ public class UserService {
 
     public void deleteUser(int userId)
     {
-        userRepository3.deleteById(userId);
+       userRepository3.deleteById(userId);
         //delted...
     }
 
@@ -37,6 +37,5 @@ public class UserService {
         user.setPassword(password);
         user =userRepository3.save(user);
         return user;
-
     }
 }

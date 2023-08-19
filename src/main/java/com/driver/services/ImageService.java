@@ -17,10 +17,8 @@ public class ImageService {
 
     public Image addImage(Integer blogId, String description, String dimensions)
     {
-        if(!blogRepository2.existsById(blogId))return new Image();
         //add an image to the blog
         Blog blog=blogRepository2.findById(blogId).get();
-
         //let's Image Entity.. here we go...
         Image image=new Image();
         image.setDescription(description);
@@ -46,13 +44,15 @@ public class ImageService {
         String[]givenDimension=givenDimensions.split("X");
         String[]screenDimension=screenDimensions.split("X");
 
-        Double given=Double.parseDouble(givenDimension[0])*Double.parseDouble(givenDimension[1]);
+       int givenWidth=Integer.parseInt(givenDimension[0]);
+       int givenHeight=Integer.parseInt(givenDimension[1]);
 
-        Double screen=Double.parseDouble(screenDimension[0])*Double.parseDouble(screenDimension[1]);
+       int screenWidth=Integer.parseInt(screenDimension[0]);
+       int screenHeight=Integer.parseInt(screenDimension[1]);
 
-        int ans=(int)(screen/given);
-
-        return ans;
+       int width=screenWidth/givenWidth;
+       int height=screenHeight/givenHeight;
+       return width*height;
 
     }
 }

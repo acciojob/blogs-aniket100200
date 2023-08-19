@@ -25,7 +25,7 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable int userId)
     {
         // delete user using deleteById
-        userService.deleteUser(userId);
+         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
