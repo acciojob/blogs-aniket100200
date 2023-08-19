@@ -14,11 +14,11 @@ public class UserController {
     @Autowired
     private UserService userService=new UserService();
     @PostMapping("/create")
-    public ResponseEntity<Void> createUser(@RequestParam String username, @RequestParam String password)
+    public ResponseEntity<User> createUser(@RequestParam String username, @RequestParam String password)
     {
         // create a new user with given username and password
         User user=userService.createUser(username,password);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{userId}")
@@ -30,10 +30,10 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Void> updateUser(@RequestParam Integer id, @RequestParam String password)
+    public ResponseEntity<User> updateUser(@RequestParam Integer id, @RequestParam String password)
     {
         // update password of given user
         User user=userService.updateUser(id,password);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 }

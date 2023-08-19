@@ -20,6 +20,7 @@ public class UserService {
         user.setPassword(password);
         user.setFirstName("test");
         user.setLastName("test");
+
         user =userRepository3.save(user);
         return user;
     }

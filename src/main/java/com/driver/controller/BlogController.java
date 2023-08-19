@@ -21,7 +21,7 @@ public class BlogController {
 
         // Create a blog and add it under given user
         Blog blog= blogService.createAndReturnBlog(userId, title, content);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(blog,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{blogId}")
