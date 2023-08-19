@@ -26,15 +26,15 @@ public class BlogService {
         //create a blog at the current time
 
         Blog blog=new Blog();
-        if(userId==null)return  blog;
-        if(!userRepository1.existsById(userId))return new Blog();
         User user=userRepository1.findById(userId).get();
         blog.setTitle(title);
         blog.setContent(content);
-        blog.setUser(user);
 
+        //bidirectional mapping ka istemaal..
+        blog.setUser(user);
         user.getBlogList().add(blog);
-        blog = blogRepository1.save(blog);
+
+       userRepository1.save(user);
         return blog;
 
     }
