@@ -20,7 +20,7 @@ public class UserService {
         user.setPassword(password);
         user.setFirstName("test");
         user.setLastName("test");
-
+        user.setBlogList(new ArrayList<>());
         user =userRepository3.save(user);
         return user;
     }

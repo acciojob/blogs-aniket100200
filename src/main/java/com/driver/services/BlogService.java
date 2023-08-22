@@ -29,6 +29,7 @@ public class BlogService {
         User user=userRepository1.findById(userId).get();
         blog.setTitle(title);
         blog.setContent(content);
+        blog.setImageList(new ArrayList<>());
 
         //bidirectional mapping ka istemaal..
         blog.setUser(user);
