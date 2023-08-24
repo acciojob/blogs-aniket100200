@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogService {
@@ -26,16 +27,23 @@ public class BlogService {
         //create a blog at the current time
 
         Blog blog=new Blog();
-        User user=userRepository1.findById(userId).get();
+       Optional<User>optional =userRepository1.findById(userId);
+       if(optional.isPresent()==false)return blog;
+       User user=optional.get();
+
+       blog.setPubDate(new Date());
+
         blog.setTitle(title);
         blog.setContent(content);
         blog.setImageList(new ArrayList<>());
 
         //bidirectional mapping ka istemaal..
         blog.setUser(user);
+
         user.getBlogList().add(blog);
 
        userRepository1.save(user);
+       blog=blogRepository1.save(blog);
         return blog;
 
     }
