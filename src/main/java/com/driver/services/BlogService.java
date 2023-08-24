@@ -39,8 +39,10 @@ public class BlogService {
 
         //bidirectional mapping ka istemaal..
         blog.setUser(user);
-
-        user.getBlogList().add(blog);
+        List<Blog>blogList=user.getBlogList();
+        if(blogList==null)blogList=new ArrayList<>();
+        blogList.add(blog);
+        user.setBlogList(blogList);
 
        userRepository1.save(user);
        blog=blogRepository1.save(blog);
