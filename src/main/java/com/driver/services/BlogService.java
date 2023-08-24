@@ -25,27 +25,13 @@ public class BlogService {
     public Blog createAndReturnBlog(Integer userId, String title, String content)
     {
         //create a blog at the current time
+        User user = userRepository1.findById(userId).get();
+        Blog blog = new Blog(title,content);
 
-        Blog blog=new Blog();
-       Optional<User>optional =userRepository1.findById(userId);
-       if(optional.isPresent()==false)return blog;
-       User user=optional.get();
-
-       blog.setPubDate(new Date());
-
-        blog.setTitle(title);
-        blog.setContent(content);
-        blog.setImageList(new ArrayList<>());
-
-        //bidirectional mapping ka istemaal..
+        blog.setPubDate(new Date());
         blog.setUser(user);
-        List<Blog>blogList=user.getBlogList();
-        if(blogList==null)blogList=new ArrayList<>();
-        blogList.add(blog);
-        user.setBlogList(blogList);
-
-       userRepository1.save(user);
-       blog=blogRepository1.save(blog);
+        user.getBlogList().add(blog);
+        userRepository1.save(user);
         return blog;
 
     }

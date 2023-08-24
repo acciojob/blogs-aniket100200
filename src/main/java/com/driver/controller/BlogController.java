@@ -12,16 +12,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/blogs")
 public class BlogController {
-    @Autowired
-    private BlogService blogService=new BlogService();
+
+//    @Autowired
+//    BlogService blogService;
+
+    BlogService blogService = new BlogService();
     @PostMapping
     public ResponseEntity createBlog(@RequestParam Integer userId ,
                                      @RequestParam String title,
                                      @RequestParam String content) {
-
         // Create a blog and add it under given user
-        Blog blog= blogService.createAndReturnBlog(userId, title, content);
-        return new ResponseEntity(HttpStatus.CREATED);
+        blogService.createAndReturnBlog(userId, title, content);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{blogId}")
@@ -31,7 +33,3 @@ public class BlogController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
-
-
-
-

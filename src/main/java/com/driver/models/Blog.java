@@ -20,6 +20,12 @@ public class Blog
     private String content;
     private Date pubDate;
 
+    public Blog(String title, String content)
+    {
+        this.title=title;
+        this.content=content;
+    }
+
     public int getId()
     {
         return id;
