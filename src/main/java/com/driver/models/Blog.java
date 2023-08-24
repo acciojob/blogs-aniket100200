@@ -1,6 +1,5 @@
 package com.driver.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -10,28 +9,32 @@ import java.util.List;
 
 @Entity
 @Table
-public class Blog
-{
+public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id;
-
+    private Integer id;
     private String title;
     private String content;
     private Date pubDate;
 
-    public Blog(String title, String content)
-    {
-        this.title=title;
-        this.content=content;
+    @ManyToOne
+    @JoinColumn
+    private User user;
+
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+    private List<Image> imageList = new ArrayList<>();
+
+    public Blog(){}
+    public Blog(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
-    public int getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -55,29 +58,8 @@ public class Blog
         return pubDate;
     }
 
-    public void setPubDate(Date pubDate)
-    {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
-    }
-
-    //as a parent class..
-    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    private List<Image>imageList=new ArrayList<>();
-
-
-    //as child class of User...
-
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnore
-    private User user;
-
-    public List<Image> getImageList() {
-        return imageList;
-    }
-
-    public void setImageList(List<Image> imageList) {
-        this.imageList = imageList;
     }
 
     public User getUser() {
@@ -86,5 +68,13 @@ public class Blog
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }
